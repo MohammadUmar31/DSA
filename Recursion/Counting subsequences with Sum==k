@@ -1,0 +1,16 @@
+int countingsubseq(int i,int sum, int arr[], int n, int k){
+        if(i==n){
+            if(sum==k){
+                return 1;
+            }
+            return 0;
+        }
+        sum=sum+arr[i];
+        int left=countingsubseq(i+1,sum,arr,n,k);
+        sum=sum-arr[i];
+        int right=countingsubseq(i+1,sum,arr,n,k);
+        return left+right;
+    }
+    int findSubSequencesWithSumK(int arr[], int n, int k) {
+        return countingsubseq(0,0,arr,n,k);
+    }
