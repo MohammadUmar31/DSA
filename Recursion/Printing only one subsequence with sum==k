@@ -1,0 +1,22 @@
+vector<int> ans;
+    void sub_seq(int i,vector<int> v,int sum, int arr[], int n, int k, bool &is_printed){
+        if(i==n){
+            if(sum==k && is_printed==false){
+                ans=v;
+                is_printed=true;
+            }
+            return;
+        }
+        v.push_back(arr[i]);
+        sum+=arr[i];
+        sub_seq(i+1,v,sum,arr,n,k,is_printed);
+        v.pop_back();
+        sum-=arr[i];
+        sub_seq(i+1,v,sum,arr,n,k,is_printed);
+    }
+    vector<int> findSubSequencesWithSumK(int arr[], int n, int k) {
+        vector<int> v;
+        bool is_printed=false;
+        sub_seq(0,v,0,arr,n,k,is_printed);
+        return ans;
+    }
