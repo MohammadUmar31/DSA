@@ -1,0 +1,11 @@
+You are  given an array arr of size n. 
+Your task is to write a recursive function that checks if the array is a "mirror image" of itself. 
+An array is considered a mirror image if the first half is the reverse of the second half.
+
+bool isMirrorImage(vector<int>& arr, int n){
+        static int i=0;
+        if(i>=n/2) return true;
+        if(arr[i]!=arr[n-i-1]) return false;
+        i++;
+        return isMirrorImage(arr,n);
+}
