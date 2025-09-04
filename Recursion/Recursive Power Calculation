@@ -1,0 +1,8 @@
+You are given a real number a and an integer b (b > 0), and your task is to write a recursive function that calculates a raised to the power of b (i.e., a^b).
+
+double recursivePower(double a, int b) {
+        if(b==1) return a;
+        else{
+            return a * recursivePower(a,b-1);
+        }
+}
