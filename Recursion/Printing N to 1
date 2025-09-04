@@ -1,0 +1,9 @@
+You are given a positive integer N.
+Your task is to print the numbers from 1 to N in descending order using a recursive function.
+
+void print1toNInDescendingOrder(int N) {
+        if(N==0) return;
+        cout<<N<<endl;
+        N--;
+        return print1toNInDescendingOrder(N);
+}
