@@ -1,0 +1,18 @@
+You're given a positive integer n, and your task is to write a recursive function that:
+First prints all even numbers from 1 to n in ascending order.
+Then prints all odd numbers from n to 1 in descending order.
+
+void printeven(int i, int n){
+        if(i==n+1) return;
+        if(i%2==0) cout<<i<<" ";
+        printeven(i+1,n);
+}
+void printodd(int n){
+        if(n==0) return;
+        if(n%2!=0) cout<<n<<" ";
+        printodd(n-1);
+}
+void printEvenOdd(int n) {
+        printeven(1,n);
+        printodd(n);
+}
