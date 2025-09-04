@@ -1,0 +1,31 @@
+You are given a collection of distinct numbers (arr) and a target sum (target).
+Your task is to find all unique combinations in arr where the numbers sum up to the target. 
+Each number in the arr can only be used once in a combination.
+
+You need to return a list of all possible unique combinations that add up to the target value. 
+Each combination should only include distinct numbers, and duplicate combinations should not be included in the result.
+
+void backtrack(vector<vector<int>>& result, vector<int>& templist, vector<int>& arr, int remain, int start){
+        if(remain<0){
+            return;
+        }
+        if(remain==0){
+            result.push_back(templist);
+            return;
+        }
+        for(int i=start;i<arr.size();i++){
+            if(i>start && arr[i]==arr[i-1]){
+                continue;
+            }
+            templist.push_back(arr[i]);
+            backtrack(result,templist,arr,remain-arr[i],i+1);
+            templist.pop_back();
+        }
+}
+vector<vector<int>> findUniqueCombinations(int n, vector<int>& arr, int target) {
+        sort(arr.begin(),arr.end());
+        vector<vector<int>> result;
+        vector<int> templist;
+        backtrack(result,templist,arr,target,0);
+        return result;
+}
