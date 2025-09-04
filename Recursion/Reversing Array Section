@@ -1,0 +1,10 @@
+You are given an array arr of size n and two indices left and right. 
+Your task is to write a recursive function that reverses the elements between the indices left and right (inclusive) while leaving the rest of the array unchanged.
+
+void reverseArraySection(vector<int>& arr, int left, int right) {
+        if(left>=right) return;
+        swap(arr[left],arr[right]);
+        left++;
+        right--;
+        reverseArraySection(arr,left,right);
+}
