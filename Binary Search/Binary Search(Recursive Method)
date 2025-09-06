@@ -1,0 +1,19 @@
+int binarySearch(int arr[], int low, int high, int target){
+    if (low > high)
+        return -1;
+    int mid = (low + high)/2;
+    if(target == arr[mid])
+        return mid;
+    else if (target > arr[mid])
+        return binarySearch(arr, mid+1, high, target);
+    else if (target < arr[mid])
+        return binarySearch(arr, low, mid - 1, target);
+    return 0;
+}
+
+
+Overflow Case
+-> Change Data Type
+Use long long for low, high, and mid to accommodate larger values without overflow
+-> Modify Calculation
+Alternatively, use mid = low + (high - low) / 2 to reduce the risk of overflow during the calculation.
