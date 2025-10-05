@@ -1,0 +1,12 @@
+int findSqrtofN(int n){
+    int ans = -1;
+    for (int k = 0; k <= n; k++){
+        if( k*k <= n){
+            ans = k;
+        }
+        else{
+            break;
+        }
+    }
+    return ans;
+}
