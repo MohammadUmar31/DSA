@@ -1,0 +1,33 @@
+    bool isPossible(vector<int>& loads,int c, int d){
+        int daysNeeded=1, currentweight=0;
+        for(int i=0;i<loads.size();i++){
+            currentweight += loads[i];
+            if(currentweight>c){
+                daysNeeded++;
+                currentweight = loads[i];
+            }
+        }
+        if(daysNeeded<=d){
+            return true;
+        }
+        return false;
+    }
+    int transportParcels(vector<int>& loads, int d) {
+        int min=*max_element(loads.begin(),loads.end());
+        int max=0;
+        for(int i=0;i<loads.size();i++){
+            max += loads[i];
+        }
+        int low=min;
+        int high=max;
+        int ans=high;
+        while(low<=high){
+            int mid=(low+high)/2;
+            if(isPossible(loads,mid,d)==true){
+                ans=mid;
+                high=mid-1;
+            }
+            else low=mid+1;
+        }
+        return ans;
+    }
