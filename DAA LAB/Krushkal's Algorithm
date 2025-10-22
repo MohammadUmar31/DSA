@@ -1,0 +1,74 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// Find function for Disjoint Set (with path compression)
+int findParent(int node, vector<int>& parent) {
+    if (parent[node] == node)
+        return node;
+    return parent[node] = findParent(parent[node], parent);
+}
+
+// Union function for Disjoint Set (by rank)
+void unionSet(int u, int v, vector<int>& parent, vector<int>& rank) {
+    int pu = findParent(u, parent);
+    int pv = findParent(v, parent);
+    if (pu != pv) {
+        if (rank[pu] < rank[pv]) {
+            parent[pu] = pv;
+        } else if (rank[pu] > rank[pv]) {
+            parent[pv] = pu;
+        } else {
+            parent[pv] = pu;
+            rank[pu]++;
+        }
+    }
+}
+
+int main() {
+    int n, e;
+    cout << "Enter number of vertices and edges: ";
+    cin >> n >> e;
+
+    // Each edge: (weight, (u, v))
+    vector<pair<int, pair<int, int>>> edges;
+
+    cout << "Enter edges (u v weight):\n";
+    for (int i = 0; i < e; i++) {
+        int u, v, w;
+        cin >> u >> v >> w;
+        edges.push_back({w, {u, v}});
+    }
+
+    // Sort edges by weight (ascending)
+    sort(edges.begin(), edges.end());
+
+    // Initialize Disjoint Set
+    vector<int> parent(n + 1), rank(n + 1, 0);
+    for (int i = 1; i <= n; i++)
+        parent[i] = i;
+
+    int mstWeight = 0;
+    vector<pair<int, int>> mstEdges; // store selected edges
+
+    cout << "\nEdges in the Minimum Spanning Tree:\n";
+
+    for (auto edge : edges) {
+        int w = edge.first;
+        int u = edge.second.first;
+        int v = edge.second.second;
+
+        int pu = findParent(u, parent);
+        int pv = findParent(v, parent);
+
+        if (pu != pv) {
+            mstWeight += w;
+            mstEdges.push_back({u, v});
+            unionSet(pu, pv, parent, rank);
+            cout << u << " - " << v << " (weight " << w << ")\n";
+        }
+    }
+
+    cout << "\nTotal weight of MST: " << mstWeight << endl;
+
+    return 0;
+}
