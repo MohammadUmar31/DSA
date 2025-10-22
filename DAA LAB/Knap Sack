@@ -1,0 +1,73 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define N 10
+int profit[N], weight[N];
+double pw[N];
+void sort(int n){
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n-i-1;j++){
+            if(pw[j]<pw[j+1]){
+                double temp1 = pw[j];
+                pw[j]=pw[j+1];
+                pw[j+1]=temp1;
+
+                int temp2=profit[j];
+                profit[j]=profit[j+1];
+                profit[j+1]=temp2;
+
+                int temp3=weight[j];
+                weight[j]=weight[j+1];
+                weight[j+1]=temp3;
+            }
+        }
+    }
+}
+double knapsack(int n, int m){
+    double max_profit=0;
+    for(int i=0;i<n;i++){
+        if(weight[i]<=m){
+            max_profit += profit[i];
+            m -= weight[i];
+        }
+        else{
+            max_profit += pw[i]*m;
+            break;
+        }
+    }
+    return max_profit;
+}
+int main(){
+    int n;
+    cout<<"Enter no. of elements : ";
+    cin>>n;
+    cout<<"Enter profits \n";
+    for(int i=0;i<n;i++){
+        cin>>profit[i];
+    }
+    cout<<endl;
+    cout<<"Enter weights \n";
+    for(int i=0;i<n;i++){
+        cin>>weight[i];
+    }
+    cout<<endl;
+    cout<<"Profit \n";
+    for(int i=0;i<n;i++){
+        cout<<profit[i]<<" ";
+    }
+    cout<<endl;
+    cout<<"Weight "<<endl;
+    for(int i=0;i<n;i++){
+        cout<<weight[i]<<" ";
+    }
+    cout<<endl;
+    int m;
+    cout<<"Enter the capacity of bag : ";
+    cin>>m;
+    for(int i=0;i<n;i++){
+        pw[i]=(double)profit[i]/weight[i];
+    }
+    sort(n);
+    double ans = knapsack(n,m);
+    cout<<"Maximum profit : " <<ans;
+    return 0;
+}
