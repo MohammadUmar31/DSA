@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+using namespace std;
+bool compare(pair<int, pair<int,int>> a, pair<int, pair<int,int>> b){
+    return a.second.second > b.second.second;
+}
+int main() {
+  int n;
+  cout<<"Enter no. of jobs : ";
+  cin>>n;
+  vector<pair<int, pair<int,int>>> jobs(n);
+  cout<<"Enter jobs details"<<endl;
+  cout<<"Id Deadlne Profit\n";
+  for(int i=0;i<n;i++){
+      int id,deadline,profit;
+      cin>>id>>deadline>>profit;
+      jobs[i]={id,{deadline,profit}};
+  }
+  sort(jobs.begin(),jobs.end(),compare);
+  int maxdeadline=0;
+  for(auto &job : jobs){
+      maxdeadline=max(maxdeadline,job.second.first);
+  }
+  vector<int> slot(maxdeadline+1,-1);
+  int totalprofit=0;
+  vector<int> sequence;
+  for(int i=0;i<n;i++){
+      for(int d=jobs[i].second.first;d>0;d--){
+          if(slot[d]==-1){
+              slot[d]=jobs[i].first;
+              totalprofit += jobs[i].second.second;
+              sequence.push_back(jobs[i].first);
+              break;
+          }
+      }
+  }
+  cout<<"Max profit : "<<totalprofit<<endl;
+  cout<<"Jobs sequence ";
+  for(int id : sequence){
+      cout<<id<<" ";
+  }
+  return 0;
+}
