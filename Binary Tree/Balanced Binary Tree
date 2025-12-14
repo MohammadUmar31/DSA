@@ -1,0 +1,13 @@
+int height(Node* root, bool &ans){
+        if(root==nullptr) return 0;
+        int left_height=height(root->left,ans);
+        int right_height=height(root->right,ans);
+        int diff=abs(left_height-right_height);
+        if(diff>1) ans=false;
+        return 1+max(left_height,right_height);
+}
+bool balanced (Node* root) {  
+        bool ans=true;
+        height(root,ans);
+        return ans;
+}
