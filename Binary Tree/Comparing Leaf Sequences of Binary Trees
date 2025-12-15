@@ -1,0 +1,16 @@
+void collectleaves(Node* root, vector<int>& leaves){
+            if(root==nullptr) return;
+            if(root->left == nullptr && root->right==nullptr){
+                leaves.push_back(root->data);
+                return;
+            }
+            collectleaves(root->left,leaves);
+            collectleaves(root->right,leaves);
+}
+bool leafSimilar(Node* root1, Node* root2) {
+            vector<int> c;
+            vector<int> d;
+            collectleaves(root1,c);
+            collectleaves(root2,d);
+            return c==d;
+}
