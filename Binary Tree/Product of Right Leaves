@@ -1,0 +1,20 @@
+int ProductOfRightLeaves(Node* root) {
+        if(root==nullptr) return 1;
+        int product=1;
+        queue<Node*> q;
+        q.push(root);
+        while(!q.empty()){
+            Node* temp=q.front();
+            q.pop();
+            if(temp->right!=nullptr){
+                q.push(temp->right);
+                if(temp->right->left==nullptr && temp->right->right==nullptr){
+                    product = product*temp->right->data;
+                }
+            }
+            if(temp->left!=nullptr){
+                q.push(temp->left);
+            }
+        }
+        return product;
+}
