@@ -1,0 +1,30 @@
+                                                                      Solution 1
+int totalFamilyMembers(Node* root) {
+    if (root == nullptr) {
+        return 0;
+    }
+    return 1 + totalFamilyMembers(root->left) + totalFamilyMembers(root->right);
+}
+
+
+                                                                      Solution 2
+
+int totalFamilyMembers(Node* root) {
+        if(root==nullptr) return 0;
+        int count=1;
+        queue<Node*> q;
+        q.push(root);
+        while(!q.empty()){
+            Node* temp=q.front();
+            q.pop();
+            if(temp->left!=nullptr){
+                q.push(temp->left);
+                count++;
+            }
+            if(temp->right!=nullptr){
+                q.push(temp->right);
+                count++;
+            } 
+        }
+        return count;
+}
