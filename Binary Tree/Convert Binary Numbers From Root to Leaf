@@ -1,0 +1,47 @@
+                                                                        Solution 1
+
+int totalSum = 0;
+void dfs(Node* node, int currentSum) {
+    if (node == nullptr) return;
+    currentSum = (currentSum * 2) + node->data;
+    if (node->left == nullptr && node->right == nullptr) {
+        totalSum += currentSum;
+        return;
+    }
+    dfs(node->left, currentSum);
+    dfs(node->right, currentSum);
+}
+
+int sumRootToLeaf(Node* root) {
+    totalSum = 0;
+    dfs(root, 0);
+    return totalSum;
+}
+
+
+                                                                        Solution 2
+
+int sumRootToLeaf(Node* root) {
+    if (root == nullptr) return 0;
+    int totalSum = 0;
+    queue<pair<Node*, int>> q;
+    q.push({root, 0});
+
+    while (!q.empty()) {
+        pair<Node*, int> current = q.front();
+        q.pop();
+
+        Node* node = current.first;
+        int currentSum = current.second;
+
+        currentSum = (currentSum * 2) + node->data;
+
+        if (node->left == nullptr && node->right == nullptr) {
+            totalSum += currentSum;
+        } else {
+            if (node->left) q.push({node->left, currentSum});
+            if (node->right) q.push({node->right, currentSum});
+        }
+    }
+    return totalSum;
+}
