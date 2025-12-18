@@ -1,0 +1,32 @@
+double medianSortedArrays(vector<int>& arr1, vector<int>& arr2) {
+       int i=0;
+       int j=0;
+       int k=0;
+       int m=arr1.size();
+       int n=arr2.size();
+       int new_arr[m+n];
+       int l=m+n;
+       double median=0;
+       while(i<m && j<n){
+           if(arr1[i]<=arr2[j]){
+               new_arr[k++]=arr1[i++];
+           }
+           else if(arr[i]>-arr2[j]){
+               new_arr[k++]=arr2[j++]; 
+           }
+       }
+       while(i<m){
+           new_arr[k++]=arr1[i++];
+       }
+       while(j<n){
+           new_arr[k++]=arr2[j++];
+       }
+       int mid=(0+l)/2;
+       if(l%2==0){
+           double avg=new_arr[mid-1]+new_arr[mid];
+           median=avg/2;
+       }
+       else{
+           double median=new_arr[mid];
+       }
+    }
