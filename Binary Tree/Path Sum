@@ -1,0 +1,28 @@
+                                                                        Solution 1
+
+bool hasPathSum(TreeNode* root, int targetSum) {
+        if(root==nullptr) return false;
+        queue<pair<TreeNode*,int>> q;
+        q.push({root,root->val});
+        while(!q.empty()){
+            TreeNode* temp=q.front().first;
+            int currentsum=q.front().second;
+            q.pop();
+            if(temp->left==nullptr && temp->right==nullptr && currentsum==targetSum)           
+            return true;
+            if(temp->left!=nullptr) q.push({temp->left,currentsum+temp->left->val});
+            if(temp->right!=nullptr) q.push({temp->right,currentsum+temp->right->val});
+        }
+        return false;
+}
+
+                                                                      Solution 2
+
+bool hasPathSum(TreeNode* root, int targetSum) {
+        if(root==nullptr) return 0;
+        if(root->left==nullptr && root->right==nullptr){
+            return root->val==targetSum;
+        }
+        return hasPathSum(root->left,targetSum-root->val) ||
+        hasPathSum(root->right,targetSum-root->val);
+}
