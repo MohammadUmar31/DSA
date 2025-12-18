@@ -27,6 +27,6 @@ double medianSortedArrays(vector<int>& arr1, vector<int>& arr2) {
            median=avg/2;
        }
        else{
-           double median=new_arr[mid];
+           median=new_arr[mid];
        }
     }
