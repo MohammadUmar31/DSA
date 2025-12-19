@@ -1,0 +1,16 @@
+int maxDownPath(TreeNode* root, int &ans){
+        if(root==nullptr) return 0;
+        int l=maxDownPath(root->left,ans);
+        if(l<0) l=0;
+        int r=maxDownPath(root->right,ans);
+        if(r<0) r=0;
+        int x=root->val+l+r;
+        ans=max(ans,x);
+        return root->val+max(l,r);
+}
+int maxPathSum(TreeNode* root) {
+        if(root==nullptr) return 0;
+        int ans=-1e9;
+        maxDownPath(root,ans);
+        return ans;
+}
