@@ -1,0 +1,16 @@
+void helper(TreeNode* root,string path, vector<string>& ans){
+        if(root==nullptr) return;
+        path += to_string(root->val);
+        if(root->left==nullptr && root->right==nullptr){
+            ans.push_back(path);
+            return;
+        }
+        path += "->";
+        helper(root->left,path,ans);
+        helper(root->right,path,ans);
+}
+vector<string> binaryTreePaths(TreeNode* root) {
+        vector<string> ans;
+        helper(root,"",ans);
+        return ans;
+}
