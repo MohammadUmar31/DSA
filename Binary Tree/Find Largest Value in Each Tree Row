@@ -1,0 +1,19 @@
+vector<int> largestValues(TreeNode* root) {
+        vector<int> ans;
+        if(root==nullptr) return ans;
+        queue<TreeNode*> q;
+        q.push(root);
+        while(!q.empty()){
+            int n=q.size();
+            int a=INT_MIN;
+            for(int i=0;i<n;i++){
+                TreeNode* temp=q.front();
+                q.pop();
+                if(temp->val>a) a=temp->val;
+                if(temp->left!=nullptr) q.push(temp->left);
+                if(temp->right!=nullptr) q.push(temp->right);
+            }
+            ans.push_back(a);
+        }
+        return ans;
+}
