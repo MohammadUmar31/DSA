@@ -1,0 +1,29 @@
+vector<vector<int>> verticalOrderTraversal(Node* root) {
+    map<int, map<int, vector<int>>> m;              
+    queue<pair<Node*, pair<int,int>>> q;            
+    q.push({root, {0, 0}});
+
+    while(!q.empty()) {
+        Node* temp = q.front().first;
+        int row = q.front().second.first;
+        int col = q.front().second.second;
+        q.pop();
+
+        m[col][row].push_back(temp->data);
+
+        if(temp->left != nullptr) q.push({temp->left, {row+1, col-1}});
+        if(temp->right != nullptr) q.push({temp->right, {row+1, col+1}});
+    }
+
+    vector<vector<int>> ans;
+    for (auto& col : m) {
+        vector<int> temp1;
+        for (auto& row : col.second) {
+            vector<int> temp2 = row.second;
+            sort(temp2.begin(), temp2.end());
+            temp1.insert(temp1.end(), temp2.begin(), temp2.end());
+        }
+        ans.push_back(temp1);
+    }
+    return ans;
+}
