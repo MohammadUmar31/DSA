@@ -1,0 +1,40 @@
+bool isleaf(Node* node){
+        if(node->left==nullptr && node->right==nullptr) return true;
+        return false;
+    }
+    void leftboundary(Node* root, vector<int> &ans){
+        Node* temp=root->left;
+        while(temp!=nullptr){
+            if(isleaf(temp)==false) ans.push_back(temp->data);
+            if(temp->left!=nullptr) temp=temp->left;
+            else temp=temp->right;
+        }
+    }
+    void leafnode(Node* root,vector<int> &ans){
+        if(root==nullptr) return;
+        if(isleaf(root)==true) ans.push_back(root->data);
+        leafnode(root->left,ans);
+        leafnode(root->right,ans);
+    }
+    void rightboundary(Node* root,vector<int> &ans){
+        Node* cur=root->right;
+        vector<int> temp;
+        while(cur!=nullptr){
+            if(isleaf(cur)==false) temp.push_back(cur->data);
+            if(cur->right!=nullptr) cur=cur->right;
+            else cur=cur->left;
+        }
+        int n=temp.size();
+        for(int i=n-1;i>=0;i--){
+            ans.push_back(temp[i]);
+        }
+    }
+    vector<int> boundaryTraversal(Node* root) {
+        vector<int> ans;
+        if(root==nullptr) return ans;
+        if(isleaf(root)==false) ans.push_back(root->data);
+        leftboundary(root,ans);
+        leafnode(root,ans);
+        rightboundary(root,ans);
+        return ans;
+    }
