@@ -1,0 +1,18 @@
+vector<int> topView(Node* root) {
+        map<int,int> m;
+        queue<pair<Node*,int>> q;
+        q.push({root,0});
+        while(!q.empty()){
+            Node* temp=q.front().first;
+            int col=q.front().second;
+            q.pop();
+            if(m.find(col)==m.end()) m[col]=temp->data;
+            if(temp->left!=nullptr) q.push({temp->left,col-1});
+            if(temp->right!=nullptr) q.push({temp->right,col+1});
+        }
+        vector<int> ans;
+        for(auto c : m){
+            ans.push_back(c.second);
+        }
+        return ans;
+}
