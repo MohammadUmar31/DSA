@@ -1,0 +1,19 @@
+void path(Node* root, vector<int> v, vector<vector<int>>& ans){
+        if(root==nullptr) return;
+        v.push_back(root->data);
+        if(root->left==nullptr && root->right==nullptr){
+            ans.push_back(v);
+            v.pop_back();
+            return;
+        }
+        path(root->left,v,ans);
+        path(root->right,v,ans);
+        v.pop_back();
+}
+vector<vector<int>> treepaths(Node* root) {
+        vector<vector<int>> ans;
+        if(root==nullptr) return ans;
+        vector<int> v;
+        path(root,v,ans);
+        return ans;
+}
