@@ -1,0 +1,49 @@
+string serialize(Node* root) {
+        string s;
+        if(root==nullptr) return "";
+        queue<Node*> q;
+        q.push(root);
+        while(!q.empty()){
+            Node* temp=q.front();
+            q.pop();
+            if(temp==nullptr){
+                s += "null,";
+                continue;
+            }
+            s += to_string(temp->data) + ",";
+            q.push(temp->left);
+            q.push(temp->right);
+        }
+        return s;
+}
+
+    
+Node* deserialize(string data) {
+        if(data.empty()) return nullptr;
+        vector<string> tokens;
+        string token;
+        stringstream ss(data);
+        while(getline(ss,token,',')){
+            tokens.push_back(token);
+        }
+        if(tokens[0]=="null") return nullptr;
+        Node* root=new Node(stoi(tokens[0]));
+        queue<Node*> q;
+        q.push(root);
+        int i=1;
+        while(!q.empty() && i<tokens.size()){
+            Node* parent=q.front();
+            q.pop();
+            if(tokens[i]!="null"){
+                parent->left=new Node(stoi(tokens[i]));
+                q.push(parent->left);
+            }
+            i++;
+            if(i<tokens.size() && tokens[i]!="null"){
+                parent->right=new Node(stoi(tokens[i]));
+                q.push(parent->right);
+            }
+            i++;
+        }
+        return root;
+}
