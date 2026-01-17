@@ -1,0 +1,22 @@
+long long f(string s, int k){
+        int n=s.size();
+        long long ans=0;
+        int count=0;
+        int i=0,j=0;
+        int arr[26]={0};
+        while(j<n){
+            if(arr[s[j]-'a']==0) count++;
+            arr[s[j]-'a']++;
+            while(count>k){
+                arr[s[i]-'a']--;
+                if(arr[s[i]-'a']==0) count--;
+                i++;
+            }
+            ans += j-i+1;
+            j++;
+        }
+        return ans;
+    }
+    long long substringCount(string s, int k) {
+        return f(s,k)-f(s,k-1);
+}
