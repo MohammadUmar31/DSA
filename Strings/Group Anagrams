@@ -1,0 +1,21 @@
+vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        int n=strs.size();
+        if(n==0) return {{}};
+        unordered_map<string,vector<string>> m;
+        for(auto s : strs){
+            vector<int> arr(26,0);
+            for(char ch : s){
+                arr[ch-'a']++;
+            }
+            string key="";
+            for(int count:arr){
+                key += "#" + to_string(count);
+            }
+            m[key].push_back(s);
+        }
+        vector<vector<string>> ans;
+        for(auto x : m){
+            ans.push_back(x.second);
+        }
+        return ans;
+}
