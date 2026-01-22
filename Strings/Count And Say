@@ -1,0 +1,19 @@
+string RLE(string s){
+        int n=s.size();
+        int i=0,j=1;
+        string ans="";
+        while(j<n){
+            if(s[i]==s[j]) j++;
+            else {
+                ans.append(to_string(j-i)+s[i]);
+                i=j;
+                j++;
+            }
+        }
+        ans.append(to_string(j-i)+s[i]);
+        return ans;
+}
+string countAndSay(int n) {
+       if(n==1) return "1";
+       return RLE(countAndSay(n-1));
+}
