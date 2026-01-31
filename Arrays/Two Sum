@@ -1,0 +1,63 @@
+                                                              BRUTE FORCE
+
+vector<int> twoSum(vector<int>& arr, int k) {
+    int n = arr.size();
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (arr[i] + arr[j] == k) return {i, j};
+        }
+    }
+    return {-1, -1};
+}
+
+
+                                                            BETTER APPROACH
+
+
+vector<int> twoSum(vector<int>& arr, int k) {
+    int n = arr.size();
+    vector<pair<int, int>> indexArr;
+
+    for (int i = 0; i < n; i++) {
+        indexArr.push_back({arr[i], i});
+    }
+
+    sort(indexArr.begin(), indexArr.end());
+
+    int i = 0;
+    int j = n - 1;
+
+    while (i < j) {
+        int sum = indexArr[i].first + indexArr[j].first;
+        if (sum == k) {
+            return {indexArr[i].second, indexArr[j].second};
+        }
+        if (sum < k) {
+            i++;
+        } else {
+            j--;
+        }
+    }
+
+    return {-1, -1};
+}
+
+
+                                                          OPTIMAL APPROACH
+
+
+vector<int> twoSum(vector<int>& arr, int k) {
+    int n = arr.size();
+    map<int, int> m;
+
+    for (int i = 0; i < n; i++) {
+        int x = k - arr[i];
+        if (m.find(x) != m.end()) {
+            return {m[x], i};
+        } else {
+            m[arr[i]] = i;
+        }
+    }
+
+    return {-1, -1};
+}
