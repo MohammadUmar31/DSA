@@ -1,0 +1,35 @@
+                                                                    HASHING APPROACH
+
+
+int majorityElement(vector<int>& arr) {
+    int n = arr.size();
+    map<int, int> m;
+    for (int i = 0; i < n; i++) m[arr[i]]++;
+
+    for (auto x : m) {
+        if (x.second > n / 2) return x.first;
+    }
+    return -1;
+}
+
+
+                                                          MOORES'S VOTING ALGORITHM APPROACH
+
+
+int majorityElement(vector<int>& arr) {
+    int n = arr.size();
+    int majority = 1;
+    int leader = arr[0];
+
+    for (int i = 1; i < n; ++i) {
+        if (majority == 0) {
+            leader = arr[i];
+            majority += 1;
+        } else {
+            if (arr[i] == leader) majority += 1;
+            else majority -= 1;
+        }
+    }
+
+    return leader;
+}
