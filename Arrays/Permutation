@@ -1,0 +1,16 @@
+void generate(vector<int>& arr, int start, vector<vector<int>>& result){
+        if(start==arr.size()){
+            result.push_back(arr);
+            return;
+        }
+        for(int i=start;i<arr.size();i++){
+            swap(arr[start],arr[i]);
+            generate(arr,start+1,result);
+            swap(arr[start],arr[i]);
+        }
+}
+vector<vector<int>> permute(vector<int>& arr) {
+        vector<vector<int>> result;
+        generate(arr,0,result);
+        return result;
+}
