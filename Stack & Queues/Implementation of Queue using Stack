@@ -1,0 +1,83 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+class Queue {
+private:
+    stack<int> stk1, stk2;
+
+public:
+    void push(int x) {
+        while (!stk1.empty()) {
+            stk2.push(stk1.top());
+            stk1.pop();
+        }
+        stk1.push(x);
+        while (!stk2.empty()) {
+            stk1.push(stk2.top());
+            stk2.pop();
+        }
+    }
+
+    void pop() {
+        if (!stk1.empty()) {
+            stk1.pop();
+        }
+    }
+
+    int front() {
+        if (!stk1.empty()) {
+            return stk1.top();
+        }
+        return -1;
+    }
+
+    int back() {
+        if (!stk1.empty()) {
+            while (!stk1.empty()) {
+                stk2.push(stk1.top());
+                stk1.pop();
+            }
+            int x = stk2.top();
+            while (!stk2.empty()) {
+                stk1.push(stk2.top());
+                stk2.pop();
+            }
+            return x;
+        }
+        return -1;
+    }
+
+    int size() {
+        return stk1.size();
+    }
+
+    bool empty() {
+        return stk1.empty();
+    }
+};
+
+/*
+int main() {
+    Queue queue;
+
+    queue.push(1);
+    queue.push(2);
+    queue.push(3);
+
+    cout << "Front element is: " << queue.front() << endl;
+    cout << "Back element is: " << queue.back() << endl;
+
+    queue.pop();
+    cout <<  "Top element is popped"<< endl;
+    cout << "Front element after pop is: " << queue.front() << endl;
+    cout << "Back element after pop is: " << queue.back() << endl;
+
+    cout << "Is queue empty? " << (queue.empty() ? "Yes" : "No") << endl;
+
+    queue.pop();
+    queue.pop();
+    queue.pop(); // Attempt to pop from an empty queue
+
+    return 0;
+}
+*/
