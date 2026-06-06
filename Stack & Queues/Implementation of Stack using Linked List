@@ -1,0 +1,64 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+    Node(int data, Node* next = nullptr) : data(data), next(next) {}
+};
+
+class Stack {
+public:
+    Node* top;
+    Stack() : top(nullptr) {}
+
+    void push(int x) {
+        Node* temp = new Node(x);
+        temp->next = top;
+        top = temp;
+    }
+
+    void pop() {
+        if (empty()) {
+            cout << "Stack is empty" << endl;
+            return;
+        }
+        Node* temp = top;
+        top = top->next;
+        delete temp;
+    }
+
+    int topOp() {
+        if (empty()) {
+            cout << "Stack is empty" << endl;
+            return -1;
+        }
+        return top->data;
+    }
+
+    bool empty() {
+        return top == nullptr;
+    }
+};
+
+int main() {
+    Stack stack;
+
+    stack.push(10);
+    stack.push(20);
+    stack.push(30);
+
+    cout << "Top element is: " << stack.topOp() << endl;
+
+    stack.pop();
+    cout << "Top element after pop is: " << stack.topOp() << endl;
+
+    cout << "Is stack empty? " << (stack.empty() ? "Yes" : "No") << endl;
+
+    stack.pop();
+    stack.pop();
+    stack.pop(); // Attempt to pop from an empty stack
+
+    return 0;
+}
