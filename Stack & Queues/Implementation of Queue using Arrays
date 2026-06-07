@@ -1,0 +1,98 @@
+#include<bits/stdc++.h>
+using namespace std;
+ 
+class Queue{
+public:
+
+int capacity; 
+int* arr;
+int front;
+int back ;
+int size ;
+
+    Queue(int n){
+        capacity = n;
+        arr = new int[n];
+        size = 0;
+        front = -1;
+        back = -1;
+    }
+
+    void push(int x){
+        if(size==capacity){
+            cout<<"Not possible"<<endl;
+            return;
+        }
+        if(size == 0){
+            front = 0;
+            back = 0;
+        }
+        else {
+            back = (back+1)%capacity;
+        }
+        arr[back] = x;
+        size +=1;
+    }
+
+
+    void pop(){
+        if(size ==0){
+            cout<<"Not possible"<<endl;
+            return;
+        }
+        
+        if(size ==1){
+            front = -1;
+            back = -1;
+        }
+        
+        front = (front+1)%capacity;
+        size -= 1;
+    } 
+
+    int frontElement(){
+        if(size == 0){
+            cout<<"Doesn't exist"<<endl;
+            return -1;
+        }
+       return arr[front];
+    }
+
+    int Size(){
+        return size;
+    }
+
+    bool empty(){
+        if(size == 0) return true;
+        
+        return false;
+    }
+
+
+    
+    
+ };
+ 
+int main() {
+  
+  
+ Queue queue(5);
+
+    queue.push(1);
+    queue.push(2);
+    queue.push(3);
+  
+    cout << "Front element is: " << queue.frontElement() << endl;
+    
+    cout << "Is queue empty? " << (queue.empty() ? "Yes" : "No") << endl;
+     queue.pop();
+    cout << "Front element after pop is: " << queue.frontElement() << endl;
+    cout<< "Current size of queue is: " << queue.Size()<<endl;
+    
+
+    queue.pop();
+    queue.pop();
+    queue.pop(); // Attempt to pop from an empty queue
+ 
+  return 0;
+}
