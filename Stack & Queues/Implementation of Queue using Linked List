@@ -1,0 +1,95 @@
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+    Node(int data) : data(data), next(nullptr) {}
+};
+
+class Queue {
+private:
+    Node* front;
+    Node* back;
+    int size;
+
+public:
+    Queue() : front(nullptr), back(nullptr), size(0) {}
+
+    void push(int x) {
+        Node* temp = new Node(x);
+        if (size == 0) {
+            front = back = temp;
+        } else {
+            back->next = temp;
+            back = temp;
+        }
+        size++;
+    }
+
+    void pop() {
+        if (empty()) {
+            return;
+        }
+        if (sizeOp() == 1) {
+            Node* temp = front;
+            front = back = nullptr;
+            delete temp;
+        } else {
+            Node* temp = front;
+            front = front->next;
+            delete temp;
+        }
+        size--;
+    }
+
+    int frontOp() {
+        if (empty()) {
+            return -1;
+        }
+        return front->data;
+    }
+
+    int backOp() {
+        if (empty()) {
+            return -1;
+        }
+        return back->data;
+    }
+
+    bool empty() {
+        if (sizeOp() == 0){
+            cout << "Queue is empty" << endl;
+            return true;
+        }
+        return false;
+    }
+
+    int sizeOp() {
+        return size;
+    }
+};
+
+int main() {
+    Queue queue;
+
+    queue.push(1);
+    queue.push(2);
+    queue.push(3);
+
+    cout << "Front element is: " << queue.frontOp() << endl;
+    cout << "Back element is: " << queue.backOp() << endl;
+
+    queue.pop();
+    cout << "Front element after pop is: " << queue.frontOp() << endl;
+    cout << "Back element after pop is: " << queue.backOp() << endl;
+
+    cout << "Is queue empty? " << (queue.empty() ? "Yes" : "No") << endl;
+
+    queue.pop();
+    queue.pop();
+    queue.pop(); // Attempt to pop from an empty queue
+
+    return 0;
+}
