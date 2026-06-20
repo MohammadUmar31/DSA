@@ -1,0 +1,12 @@
+int binary_to_decimal(string str)
+{
+    int ans = 0;
+    int n = str.size();
+    int prod = 1;
+    for (int i = n - 1; i >= 0; i--)
+    {
+        if (str[i] == '1') ans += prod;
+        prod = prod * 2;
+    }
+    return ans;
+}
