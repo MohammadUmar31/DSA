@@ -1,0 +1,3 @@
+int removeRightmostSetBit(int N) {
+        return N&(N-1);
+}
