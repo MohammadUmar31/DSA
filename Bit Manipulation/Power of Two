@@ -1,0 +1,4 @@
+bool isPowerOfTwo(int N) {
+        if((N&(N-1))==0) return true;
+        return false;
+}
