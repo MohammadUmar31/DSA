@@ -1,0 +1,9 @@
+arr = [ 7, 7, 9, 8, ]
+every element is appearing twice except one
+int singleNumber(vector<int> &arr) {
+        int result=0;
+        for(int i=0;i<arr.size();i++){
+            result = result^arr[i];
+        }
+        return result;
+    }
