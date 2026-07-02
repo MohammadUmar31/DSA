@@ -1,0 +1,31 @@
+void heapifyup(vector<int>& nums,int n,int i){
+        while(i>0){
+            int parent=(i-1)/2;
+            if(nums[i]<nums[parent]){
+                swap(nums[i],nums[parent]);
+                i=parent;
+            }
+            else break;
+        }
+    }
+    void heapifydown(vector<int>& nums,int n,int i){
+        int mini=i;
+        int l=2*i+1;
+        int r=2*i+2;
+        if(l<n && nums[l]<nums[mini]) mini=l;
+        if(r<n && nums[r]<nums[mini]) mini=r;
+        if(mini!=i){
+            swap(nums[i],nums[mini]);
+            heapifydown(nums,n,mini);
+        }
+    }
+    void updateHeap(vector<int>& nums, int ind, int val) {
+        nums[ind]=val;
+        int n=nums.size();
+        if(ind>0 && nums[ind]<nums[(ind-1)/2]){
+            heapifyup(nums,n,ind);
+        }
+        else{
+            heapifydown(nums,n,ind);
+        }
+    }
