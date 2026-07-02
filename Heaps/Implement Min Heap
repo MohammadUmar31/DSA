@@ -1,0 +1,57 @@
+class solution {
+    vector<int> heap;
+public:
+    void initializeHeap() {
+        heap.clear();
+    }
+    void heapifyup(int index){
+        while(index>0){
+            int parent=(index-1)/2;
+            if(heap[index]<heap[parent]){
+                swap(heap[index],heap[parent]);
+                index=parent;
+            }
+            else break;
+        }
+    }
+    void heapifydown(int index){
+        int mini=index;
+        int left=2*index+1;
+        int right=2*index+2;
+        if(left<heap.size() && heap[left]<heap[mini]) mini=left;
+        if(right<heap.size() && heap[right]<heap[mini]) mini=right;
+        if(mini!=index){
+            swap(heap[mini],heap[index]);
+            heapifydown(mini);
+        }
+    }
+    void insert(int x) {
+        heap.push_back(x);
+        heapifyup(heap.size()-1);
+    }
+ 
+    int getMin() {
+        return heap[0];
+    }
+ 
+    void extractMin() {
+        int lastelement=heap.back();
+        heap[0]=lastelement;
+        heap.pop_back();
+        heapifydown(0);
+    }
+ 
+    int heapSize() {
+        return heap.size();
+    }
+ 
+    bool isEmpty() {
+        return heap.empty();
+    }
+ 
+    void changeKey(int ind, int val) {
+        heap[ind]=val;
+        heapifyup(ind);
+        heapifydown(ind);
+    }
+};
