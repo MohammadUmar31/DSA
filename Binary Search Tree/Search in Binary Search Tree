@@ -1,0 +1,8 @@
+Node* search(Node* root, int target) {
+        while(root){
+            if(root->data==target) return root;
+            else if(root->data>target) root=root->left;
+            else root=root->right;
+        }
+        return root;
+    }
