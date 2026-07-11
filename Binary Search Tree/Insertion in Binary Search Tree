@@ -1,0 +1,21 @@
+Node* insertionBST(Node* root, int target) {
+        if(root==nullptr) return new Node(target);
+        Node* cur = root;
+        while(1){
+            if(cur->data>target){
+                if(cur->left==nullptr){
+                    cur->left=new Node(target);
+                    break;
+                }
+                cur=cur->left;
+            }
+            else{
+                if(cur->right==nullptr){
+                    cur->right=new Node(target);
+                    break;
+                }
+                cur=cur->right;
+            }
+        }
+        return root;
+    }
