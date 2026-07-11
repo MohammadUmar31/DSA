@@ -1,0 +1,26 @@
+Node* deletionBST(Node* root, int target) {
+        if(root==nullptr) return root;
+        if(root->data>target){
+            root->left=deletionBST(root->left,target);
+            return root;
+        }
+        else if(root->data<target){
+            root->right=deletionBST(root->right,target);
+            return root;
+        }
+        if(root->right==nullptr){
+            Node* temp=root->left;
+            delete root;
+            return temp;
+        }
+        else if(root->left==nullptr){
+            Node* temp=root->right;
+            delete root;
+            return temp;
+        }
+        Node* cur=root->right;
+        while(cur->left) cur=cur->left;
+        root->data=cur->data;
+        root->right=deletionBST(root->right,cur->data);
+        return root;
+    }
