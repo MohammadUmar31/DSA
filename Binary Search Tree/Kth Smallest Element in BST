@@ -1,0 +1,11 @@
+void inorder(Node* root, vector<int>& arr){
+        if(root==nullptr) return;
+        inorder(root->left,arr);
+        arr.push_back(root->data);
+        inorder(root->right,arr);
+    }
+    int kthSmallest(Node* root, int k) {
+        vector<int> arr;
+        inorder(root,arr);
+        return arr[k-1];
+    }
