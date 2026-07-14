@@ -1,0 +1,29 @@
+Node* insertionBST(Node* root,int i){
+        if(root == nullptr) return new Node(i);
+        Node* cur = root;
+        while(true){
+            if(i < cur->data){
+                if(cur->left == nullptr){
+                    cur->left = new Node(i);
+                    break;
+                }
+            cur = cur->left;
+            }
+            else{
+                if(cur->right == nullptr){
+                cur->right = new Node(i);
+                break;
+                }
+                cur = cur->right;
+            }
+        }
+        return root;
+    }
+     Node* buildZoneMap(vector<int>& zoneSequence) {
+        if(zoneSequence.empty()) return nullptr;
+        Node* root = new Node(zoneSequence[0]);
+        for(int i=1;i<zoneSequence.size();i++){
+            insertionBST(root,zoneSequence[i]);
+        }
+        return root;
+    }
