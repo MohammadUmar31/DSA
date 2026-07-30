@@ -1,0 +1,17 @@
+int maxPoints(vector<int>& cardPoints, int k) {
+        int n=cardPoints.size();
+        int total_sum=0;
+        for(int i=0;i<n;i++){
+            total_sum += cardPoints[i];
+        }
+        if(n==k) return total_sum;
+        int win_length=n-k;
+        int win_sum=0;
+        int min_sum=total_sum;
+        for(int i=0;i<n;i++){
+            win_sum += cardPoints[i];
+            if(i>=win_length) win_sum -= cardPoints[i-win_length];
+            if(i>=win_length-1) min_sum = min(min_sum,win_sum);
+        }
+        return total_sum-min_sum;
+    }
